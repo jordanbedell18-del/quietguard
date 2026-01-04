@@ -1,22 +1,36 @@
-function App() {
+import { Routes, Route, Link, Navigate } from "react-router-dom";
+import Home from "./pages/Home";
+import Subscriptions from "./pages/Subscriptions";
+
+export default function App() {
   return (
-    <div style={{ padding: "2rem", fontFamily: "Arial, sans-serif" }}>
-      <h1>QuietGuard</h1>
-
-      <p>Track subscriptions. Catch price increases. Protect your money.</p>
-
-      <button
+    <div style={{ fontFamily: "Arial, sans-serif" }}>
+      {/* Simple top nav */}
+      <header
         style={{
-          padding: "10px 16px",
-          marginTop: "12px",
-          fontSize: "16px",
-          cursor: "pointer",
+          display: "flex",
+          gap: 12,
+          padding: 16,
+          borderBottom: "1px solid #e5e5e5",
+          alignItems: "center",
         }}
       >
-        Add Subscription
-      </button>
+        <strong>QuietGuard</strong>
+
+        <nav style={{ display: "flex", gap: 10 }}>
+          <Link to="/">Home</Link>
+          <Link to="/subscriptions">Subscriptions</Link>
+        </nav>
+      </header>
+
+      {/* Page content */}
+      <main style={{ padding: 16 }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/subscriptions" element={<Subscriptions />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </main>
     </div>
   );
 }
-
-export default App;
